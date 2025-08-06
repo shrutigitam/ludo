@@ -6,17 +6,15 @@ import random
 import tkinter.messagebox
 
 root = Tk()
-# The window size of the game.
-root.resizable(width=False, height=False)
+
+root.resizable(width=False, height=False)  # The window size of the game.
+root.geometry('1000x750')
 root.configure(background='green')
 root.title("Checkers")
 
-# Loading all the image files that are required in the game.
-logo = PhotoImage(file="whitebox.gif")
-# Loading all the image files that are required in the game.
-logo2 = PhotoImage(file="red side.gif")
-# Loading all the image files that are required in the game.
-logo3 = PhotoImage(file="red.gif")
+logo = PhotoImage(file="whitebox.gif")      # Loading all the image files that are required in the game.
+logo2 = PhotoImage(file="red side.gif")     # Loading all the image files that are required in the game.
+logo3 = PhotoImage(file="red.gif")          # Loading all the image files that are required in the game.
 logo4 = PhotoImage(file="blue side.gif")
 logo5 = PhotoImage(file="green side.gif")
 logo6 = PhotoImage(file="yellow side.gif")
@@ -42,14 +40,13 @@ logoab= PhotoImage(file="blue.gif")
 logoay= PhotoImage(file="yellow.gif")
 logoag= PhotoImage(file="green.gif")
 
-Label(image=logo2, width=298, height=298).place(x=-1, y=-1)
+Label(image=logo2, width=298, height=298).place(x=-1, y=-1)               #setting up board images
 Label(image=logo4, width=300, height=300).place(x=(-2), y=(448))
 Label(image=logo5, width=296, height=296).place(x=(450), y=(0))
 Label(image=logo6, width=294, height=294).place(x=(450), y=(450))
 Label(image=logo7, width=150, height=150).place(x=(298), y=(298))
 
-#initializing variable and flags used in game
-c = 0
+c = 0                                #initializing variable and flags that are to be used in the game
 lx = 0
 bb =0
 nc = 0
@@ -66,13 +63,14 @@ GREENKILL = False
 YELLOWKILL = False
 
 
-def board(): #Drawing the board, piece by piece.
+def board():                            #Drawing the board, piece by piece.
+
+                                        #Splash Screen.
     tkinter.messagebox.showinfo(title=None, message="TO START GAME PRESS OKAY & TO EXIT PRESS CROSS UP IN THE WINDOW")
     v = 0
     z = 0
 
-    # Drawing White boxes
-    while (v != 300):
+    while (v != 300):           #Drawing White boxes
         z = 0
         while (z != 150):
             Label(image=logo, width=46, height=46).place(x=(300 + z), y=(0 + v))
@@ -81,18 +79,19 @@ def board(): #Drawing the board, piece by piece.
 
     z = 0
     v = 0
-    while (v != 300):
+    while (v != 300):          #Drawing White boxes
         z = 0
         while (z != 150):
             Label(image=logo, width=46, height=46).place(x=(0 + v), y=(300 + z))
             z = z + 50
         v = v + 50
 
+    #####################
+
     v = 0
     z = 0
 
-    # Drawing White boxes
-    while (v != 300):
+    while (v != 300):            #Drawing White boxes
         z = 0
         while (z != 150):
             Label(image=logo, width=46, height=46).place(x=(300 + z), y=(450 + v))
@@ -101,7 +100,7 @@ def board(): #Drawing the board, piece by piece.
 
     z = 0
     v = 0
-    while (v != 300):
+    while (v != 300):         #Drawing White boxes
         z = 0
         while (z != 150):
             Label(image=logo, width=46, height=46).place(x=(450 + v), y=(300 + z))
@@ -109,8 +108,7 @@ def board(): #Drawing the board, piece by piece.
         v = v + 50
 
     v = 0
-    # Drawing Green boxes
-    while (v != 250):
+    while (v != 250):     #Drawing Green boxes
         Label(image=logog, width=46, height=46).place(x=(350), y=(50 + v))
         v = v + 50
 
@@ -118,8 +116,7 @@ def board(): #Drawing the board, piece by piece.
     Label(image=logogs, width=46, height=46).place(x=(400), y=(50))
 
     v = 0
-    # Drawing Yellow boxes
-    while (v != 250):
+    while (v != 250):     #Drawing Yellow boxes
         Label(image=logoy, width=46, height=46).place(x=(450 + v), y=(350))
         v = v + 50
 
@@ -127,8 +124,7 @@ def board(): #Drawing the board, piece by piece.
     Label(image=logoys, width=46, height=46).place(x=(650), y=(400))
 
     v = 0
-    # Drawing Red Boxes
-    while (v != 250):
+    while (v != 250):    #Drawing Red Boxes
         Label(image=logor, width=46, height=46).place(x=(50 + v), y=(350))
         v = v + 50
 
@@ -136,16 +132,14 @@ def board(): #Drawing the board, piece by piece.
     Label(image=logors, width=46, height=46).place(x=(50), y=(300))
 
     v = 0
-    # Drawing Blue Boxes
-    while (v != 250):
+    while (v != 250):    #Drawing Blue Boxes
         Label(image=logob, width=46, height=46).place(x=(350), y=(450 + v))
         v = v + 50
 
     Label(image=logobs, width=46, height=46).place(x=(300), y=(650))
     Label(image=logob, width=46, height=46).place(x=(400), y=(600))
 
-    # Drawing arrows
-    Label(image=logoh, width=46, height=46).place(x=250, y=400)
+    Label(image=logoh, width=46, height=46).place(x=250, y=400)        #Drawing arrows
     Label(image=logot, width=46, height=46).place(x=300, y=450)
     Label(image=logoh1, width=46, height=46).place(x=400, y=450)
     Label(image=logot1, width=46, height=46).place(x=450, y=400)
@@ -154,23 +148,22 @@ def board(): #Drawing the board, piece by piece.
     Label(image=logoh3, width=46, height=46).place(x=300, y=250)
     Label(image=logot3, width=46, height=46).place(x=250, y=300)
 
-class YBox:
+class YBox:                               #Class of yellow box
     rap = None
 
     def __init__(self, num=-1, x=0, y=0, x0=0, y0=0, double=False, ):
-        self.num = num
-        self.x = x
+        self.num = num                #no of gamepiece acc to box
+        self.x = x                    #initial and final co-ordinates of the boxes
         self.y = y
         self.x0 = x0
         self.y0 = y0
-        self.rap = Label(image=logoay, width=20, height=20)
-        self.double = double
+        self.rap = Label(image=logoay, width=20, height=20)        #image of game piece.
+        self.double = double                                       #if one game piece on top of another.
 
-    def swap(self):
+    def swap(self):                     #Swaps the position of gamepiece according to the number on dice.
         self.rap.place(x=self.x0 + 13, y=self.y0 + 14)
 
-class GBox:
-#Class of green box
+class GBox:                             #Class of green box
     rap = None
 
     def __init__(self, num=-1, x=0, y=0, x0=0, y0=0, double=False, ):
@@ -185,7 +178,7 @@ class GBox:
     def swap(self):
         self.rap.place(x=self.x0 + 13, y=self.y0 + 14)
 
-class BBox:
+class BBox:                           #Class of Blue box
     rap = None
 
     def __init__(self, num=-1, x=0, y=0, x0=0, y0=0, double=False, ):
@@ -200,7 +193,7 @@ class BBox:
     def swap(self):
         self.rap.place(x=self.x0 + 13, y=self.y0 + 14)
 
-class Box:
+class Box:                           #class of red box
     rap = None
 
     def __init__(self, num=-1, x=0, y=0, x0=0, y0=0, double=False, ):
@@ -216,35 +209,33 @@ class Box:
         self.rap.place(x=self.x0 + 13, y=self.y0 + 14)
 
 
-def main():
+def main():                                 # Main game function.
 
     global box, redbox, bluebox, greenbox, yellowbox, redhome, bluehome, yellowhome, greenhome
     global red, blue, yellow, green, rap, RED, BLUE, GREEN, YELLOW, dice, nc, TURN, bb
 
-    if c == 0:
+    if c == 0:                              #constructs the game pieces first time the code is ran.
 
         board()
-        # list of co-ordinates of all the outer boxes
-        box = [Box() for i in range(52)]
 
-        # list of co-ordinates of all the colored boxes, excluding home and stop
-        redbox = [Box() for i in range(57)]
+        box = [Box() for i in range(52)]  # list of co-ordinates of all the outer boxes
+
+        redbox = [Box() for i in range(57)]  # list of co-ordinates of all the colored boxes, excluding home and stop.
         bluebox = [Box() for i in range(57)]
         greenbox = [Box() for i in range(57)]
         yellowbox = [Box() for i in range(57)]
 
-        # list co-ordinates of all the home positions
-        redhome = [Box() for i in range(4)]
+        redhome = [Box() for i in range(4)]  # list co-ordinates of all the home positions
         bluehome = [Box() for i in range(4)]
         greenhome = [Box() for i in range(4)]
         yellowhome = [Box() for i in range(4)]
 
-        red = [Box() for i in range(4)]
-        blue = [BBox() for i in range(4)]
+        red = [Box() for i in range(4)]  # list of co-ordinates of all the game pieces in their initial state
+        blue = [BBox() for i in range(4)]  # that is equal to their respective home co-ordinates.
         green = [GBox() for i in range(4)]
         yellow = [YBox() for i in range(4)]
 
-        for i in range(2):
+        for i in range(2):                        #Populates list of homeboxes, colored boxes, gamepieces and white boxes
             redhome[i].x = (100 + (100 * i))
             redhome[i].y = 100
             red[i].x0 = redhome[i].x
@@ -411,12 +402,13 @@ def main():
             red[i].swap()
             blue[i].swap()
             green[i].swap()
-            yellow[i].swap()
+            yellow[i].swap()                       #Population of all list is completed. Now game can begin
 
 
-    else:
+    else:  # HERE ALL THE GAME OCCURS ... IF WAGHAIRA, MOVEMENT IDHAR HOGI !!!
 
-        if c >= 1:
+        if c >= 1:                                #This condition is true when a click is made.
+
             if RED == True and TURN == False:      #Red players turn
                 print("Red's Turn")
                 print("moves available: ", rolls)
@@ -426,7 +418,7 @@ def main():
                     RED = False
                     clear()                                          #clears variable, next players turn
 
-                if RED == True:
+                if RED == True:                                   # searches if click is made on a red game piece.
                     for i in range(len(red)):
                         if ((((cx > red[i].x0 + 13) and (cx < red[i].x + 13)) and (
                             (cy > red[i].y0 + 14) and (cy < red[i].y + 14)))
@@ -755,9 +747,7 @@ def roll():   #Rolling function that rolls a dice, goes again if its a six
                 TURN = False
 
 
-
-
-def clear():       #clears all the variable prior to next player's turn
+def clear():        #clears all the variable prior to next player's turn
     global nc, rolls, TURN, L1, L3, L4
     nc = 0
     del rolls[:]
@@ -836,7 +826,7 @@ def kill(a,b,c,d,bh,ch,dh):   #function that determines if a gamepiece can be ki
                 d[i].swap()
                 break
 
-def doublecheck(a):
+def doublecheck(a):        #makes a double is two or more gamepieces on top of another.
 
     for k in range (len(a)):
         a[k].double = False
@@ -847,11 +837,11 @@ def doublecheck(a):
                 a[j].double = True
                 a[i].double = True
 
- #prints the "red player's turn" initially
-turn()
+
+turn()            #prints the "red player's turn" initially
 
 button = Button(root, text="   ROLL   ", relief="raised", font=("Arial", 20),
-                command=roll)
+                command=roll)  # call roll function evertime this button is clicked
 button.place(x=805, y=120)
 
 root.mainloop()
